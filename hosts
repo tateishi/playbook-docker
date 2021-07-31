@@ -1,0 +1,5 @@
+# -*- mode: yaml -*-
+
+target:
+  hosts:
+    dc01:

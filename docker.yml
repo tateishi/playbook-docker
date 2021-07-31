@@ -1,0 +1,36 @@
+# ansible-galaxy install cmprescott.autofs
+- hosts: target
+  become: true
+  roles:
+    - name: install docker
+      role: docker
+    - name: install autofs
+      role: cmprescott.autofs
+      autofs_indirect_maps:
+        - name: "auto.nfs-nas"
+          path: /mnt/nfs
+          mark: "nfs mount from fs1"
+          options: "--timeout=60"
+          mounts:
+            - name: "backup"
+              fstype: "nfs,rw"
+              url: "fs1.tateishi:/volume1/nfs/jupyter-backup"
+
+- hosts: target
+  tasks:
+    - name: make wks directory
+      file:
+        path: ~/wks
+        state: directory
+    - name: checkout docker-jupyterlab repository
+      git:
+        repo: https://github.com/tateishi/docker-jupyterlab.git
+        dest: ~/wks/docker-jupyterlab
+
+    - name: crontab backup
+      become: true
+      cron:
+        name: backup
+        minute: "0"
+        hour: "2"
+        job: "bash /home/ubuntu/wks/docker-jupyterlab/bin/backup.sh"
