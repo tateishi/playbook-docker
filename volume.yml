@@ -10,7 +10,7 @@
     pool_size: "+100%FREE"
     data_name: data
     data_size: "15G"
-    fstype: btrfs
+    fstype: ext4
     path_name: /var/lib/docker
 
   tasks:
