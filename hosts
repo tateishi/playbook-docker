@@ -3,3 +3,8 @@
 target:
   hosts:
     dc01:
+    zabbix:
+    ldc01:
+    lake:
+    es01:
+    elastic:

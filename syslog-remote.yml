@@ -1,0 +1,14 @@
+- name: rsyslog remote
+  hosts: target
+  roles:
+    - rsyslog-remote
+  vars:
+    rsyslog:
+      - pattern: "*.*"
+        proto: "udp"
+        host: "syslog"
+        port: "514"
+      - pattern: "*.*"
+        proto: "tcp"
+        host: "syslog"
+        port: "1024"
