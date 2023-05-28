@@ -1,4 +1,2 @@
 - import_playbook: regular.yml
-- import_playbook: syslog-remote.yml
-- import_playbook: volume.yml
 - import_playbook: docker.yml
